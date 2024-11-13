@@ -1,0 +1,66 @@
+EJERCICIO 2
+tablas_largas_almacen = 26
+tablas_cortas_almacen = 33
+ganchos_pequenos_almacen = 200
+ganchos_grandes_almacen = 20
+tornillos_almacen = 510
+
+
+tablas_largas_necesarias = 4
+tablas_cortas_necesarias = 6
+ganchos_pequenos_necesarios = 12
+ganchos_grandes_necesarios = 2
+tornillos_necesarios = 14
+
+
+estantes_pedido = 15
+
+
+tablas_largas_requeridas = tablas_largas_necesarias * estantes_pedido
+tablas_cortas_requeridas = tablas_cortas_necesarias * estantes_pedido
+ganchos_pequenos_requeridos = ganchos_pequenos_necesarios * estantes_pedido
+ganchos_grandes_requeridos = ganchos_grandes_necesarios * estantes_pedido
+tornillos_requeridos = tornillos_necesarios * estantes_pedido
+
+def verificar_pedido():
+    if (tablas_largas_almacen >= tablas_largas_requeridas and
+        tablas_cortas_almacen >= tablas_cortas_requeridas and
+        ganchos_pequenos_almacen >= ganchos_pequenos_requeridos and
+        ganchos_grandes_almacen >= ganchos_grandes_requeridos and
+        tornillos_almacen >= tornillos_requeridos):
+        
+        print("Es posible realizar los 15 estantes pedidos.")
+        
+        # Calcular estantes adicionales que se pueden construir con el material sobrante
+        estantes_posibles = min(
+            tablas_largas_almacen // tablas_largas_necesarias,
+            tablas_cortas_almacen // tablas_cortas_necesarias,
+            ganchos_pequenos_almacen // ganchos_pequenos_necesarios,
+            ganchos_grandes_almacen // ganchos_grandes_necesarios,
+            tornillos_almacen // tornillos_necesarios
+        )
+        
+        estantes_sobrantes = estantes_posibles - estantes_pedido
+        print(f"Con el material sobrante puedes construir {estantes_sobrantes} estantes adicionales.")
+    
+    else:
+        # Mostrar faltantes
+        print("No es posible cubrir el pedido porque faltan:")
+        
+        if tablas_largas_almacen < tablas_largas_requeridas:
+            print(f"{tablas_largas_requeridas - tablas_largas_almacen} tablas largas")
+        
+        if tablas_cortas_almacen < tablas_cortas_requeridas:
+            print(f"{tablas_cortas_requeridas - tablas_cortas_almacen} tablas cortas")
+        
+        if ganchos_pequenos_almacen < ganchos_pequenos_requeridos:
+            print(f"{ganchos_pequenos_requeridos - ganchos_pequenos_almacen} ganchos pequeños")
+        
+        if ganchos_grandes_almacen < ganchos_grandes_requeridos:
+            print(f"{ganchos_grandes_requeridos - ganchos_grandes_almacen} ganchos grandes")
+        
+        if tornillos_almacen < tornillos_requeridos:
+            print(f"{tornillos_requeridos - tornillos_almacen} tornillos")
+
+
+verificar_pedido()
